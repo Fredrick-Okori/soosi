@@ -8,6 +8,8 @@ import Counter from './Counter'
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
+import eventsbg from "/eventsbg.jpg";
+
 
 export default function EventSchedule() {
     useEffect(() => {
@@ -17,8 +19,11 @@ export default function EventSchedule() {
 
     return (
         <>
-            <Box backgroundColor='#151853'>
-                <Container  maxW="container.xl" data-aos='zoom-in-up' data-aos-duration='2000'>
+            <Box backgroundImage={`url(${eventsbg})`}
+                backgroundPosition="center"
+                backgroundAttachment="fixed"
+                width="100%">
+                <Container  maxW="container.xl" data-aos='zoom-in-up' data-aos-duration='1000'>
                     <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']} py={{ base: 5, lg: 20 }} gap={3}>
                         <Box>
                             <Text fontSize='14' color="#df42b1" textUnderlineOffset={7} textDecor='underline' textDecorationColor='grey' p={5}>ABOUT EVENTS SCHEDULE</Text>
@@ -47,7 +52,7 @@ export default function EventSchedule() {
 
                         </Box>
                         <Box >
-                            <Image rounded={4} mt={{base: 5, lg: 0}} src='../../public/ddane.jpg' alt='Wahalla' />
+                            <Image rounded={4} mt={{base: 5, lg: 0}} src='./ddane.jpg' alt='Wahalla' />
                         </Box>
                     </Grid>
 

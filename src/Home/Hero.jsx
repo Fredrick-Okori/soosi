@@ -28,7 +28,7 @@ const carouselItems = [
         heading: 'AFRICAN SIMBA EVENTS',
         text: 'SHANGRI-LA HOTEL BANGKOK, BANGKOK, CHINA',
     },
-  
+
     {
         image: '../../public/catwalk.jpg',
         heading: 'PARADIGM LOUNGE GGABA',
@@ -93,7 +93,7 @@ const HeroSection = () => {
                             zIndex="1"
                         />
                         <VStack
-                           
+
                             position="relative"
                             zIndex="2"
                             height="100%"
@@ -129,9 +129,7 @@ const HeroSection = () => {
                 ))}
             </Carousel>
 
-            {/* //Events schedule */}
-            
-            <EventSchedule/>
+
 
         </>
     );
