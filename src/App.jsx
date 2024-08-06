@@ -1,10 +1,15 @@
 import * as React from 'react'
+import './index.css'
+
+//Registering Prismic
+
+
 
 
 import { ChakraProvider } from '@chakra-ui/react'
+import Layout from './Layout'
 
-import NavBar from './views/NavBar'
-import Home from './Home/Home'
+
 
 
 
@@ -13,12 +18,13 @@ import Home from './Home/Home'
 export default function App() {
   return (
     <>
+
       <ChakraProvider >
-      
-        <NavBar />
-        <Home/>
+        <Layout />
       </ChakraProvider>
+
     </>
-    
+
   )
 }
+
