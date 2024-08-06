@@ -117,7 +117,7 @@ export default function SideBar() {
                     </Flex>
                     <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
                         <Avatar my={2} src="avatar-1.jpg" />
-                        <Text textAlign="center">Fredrick Okori</Text>
+                        <Text textAlign="center">Soosi Soosi</Text>
                     </Flex>
                 </Flex>
             </Flex>
