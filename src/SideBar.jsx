@@ -42,7 +42,8 @@ import {
     FiHeart,
     FiAirplay,
     FiPlayCircle,
-    FiShoppingCart
+    FiShoppingCart,
+    FiPaperclip
 } from "react-icons/fi"
 import Main from './components/Main';
 
@@ -78,11 +79,11 @@ export default function SideBar() {
                         <Heading
                             mt={50}
                             mb={[25, 50, 100]}
-                            fontSize={["4xl", "4xl", "2xl", "3xl", "4xl",]}
+                            fontSize={["4xl", "4xl", "2xl", "3xl", "2xl",]}
                             alignSelf="center"
                             letterSpacing="tight"
                         >
-                            Soosi.
+                            Soosi Stream.
                         </Heading>
                         <Flex
                             flexDir={["row", "row", "column", "column", "column"]}
@@ -116,9 +117,9 @@ export default function SideBar() {
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiShoppingCart} fontSize="2xl" /></Link>
+                                    <Icon as={FiPaperclip} fontSize="2xl" /></Link>
                                 <Link to='#' _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Shop</Text>
+                                    <Text>Blog</Text>
                                 </Link>
                             </Flex>
                         </Flex>

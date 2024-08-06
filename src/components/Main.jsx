@@ -58,9 +58,9 @@ export default function Main() {
                     mb={4}
                     letterSpacing="tight"
                 >
-                    Today's <Flex display="inline-flex" fontWeight="bold">Picks</Flex>
+                    Advertise with us 
                 </Heading>
-                <Text color="gray" fontSize="sm">Pick out your best video</Text>
+                <Text color="gray" fontSize="sm">Select a video to watch</Text>
 
                 
                <VideoGallery/>

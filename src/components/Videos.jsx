@@ -116,9 +116,8 @@ const VideoGallery = () => {
                     {currentVideo && !isSmallScreen ? (
                         <VideoPlayer videoUrl={currentVideo} />
                     ) : (
-                        <Box borderWidth="1px" borderRadius="lg" p={5}>
-                            <Text>Select a video to play</Text>
-                        </Box>
+                            <>
+                            </>
                     )}
                 </Box>
 
