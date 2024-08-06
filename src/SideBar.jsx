@@ -74,7 +74,7 @@ export default function SideBar() {
                             alignSelf="center"
                             letterSpacing="tight"
                         >
-                            Rise.
+                            Soosi.
                         </Heading>
                         <Flex
                             flexDir={["row", "row", "column", "column", "column"]}
