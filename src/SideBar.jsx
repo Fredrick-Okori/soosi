@@ -34,7 +34,10 @@ import {
     FiPlus,
     FiCreditCard,
     FiSearch,
-    FiBell
+    FiBell,
+    FiEdit,
+    FiUpload,
+    FiSettings
 } from "react-icons/fi"
 import Main from './components/Main';
 
@@ -87,30 +90,30 @@ export default function SideBar() {
                                     <Icon as={FiHome} fontSize="2xl" className="active-icon" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text className="active">Home</Text>
+                                    <Text className="active">Videos</Text>
                                 </Link>
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiPieChart} fontSize="2xl" />
+                                    <Icon as={FiUpload} fontSize="2xl" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Credit</Text>
+                                    <Text>Upload</Text>
                                 </Link>
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiDollarSign} fontSize="2xl" />
+                                    <Icon as={FiEdit} fontSize="2xl" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Wallet</Text>
+                                    <Text>Edit</Text>
                                 </Link>
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiBox} fontSize="2xl" /></Link>
+                                    <Icon as={FiSettings} fontSize="2xl" /></Link>
                                 <Link to='#' _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Services</Text>
+                                    <Text>Settings</Text>
                                 </Link>
                             </Flex>
                         </Flex>
