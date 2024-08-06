@@ -35,8 +35,8 @@ const VideoCard = ({ thumbnail, videoUrl, onClick, isSmallScreen }) => (
             <>
                 <Image src={thumbnail} alt="Video Thumbnail" />
                 <Button
-                    bgGradient="linear(to-r, purple.500, #df42b1)"
-                    color="white"
+                 color='teal.500'
+                    rounded={0}
                     _hover={{
                         bgGradient: 'linear(to-r, purple.500, pink.700)',
                         boxShadow: 'xl'
@@ -112,7 +112,7 @@ const VideoGallery = () => {
     return (
         <Container maxW="container.xl" py={5}>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={5}>
-                <Box width={{ base: 'full', md: '70%' }}>
+                <Box width={{ base: 'full', md: '100%' }}>
                     {currentVideo && !isSmallScreen ? (
                         <VideoPlayer videoUrl={currentVideo} />
                     ) : (

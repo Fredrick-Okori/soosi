@@ -37,7 +37,12 @@ import {
     FiBell,
     FiEdit,
     FiUpload,
-    FiSettings
+    FiSettings,
+    FiPocket,
+    FiHeart,
+    FiAirplay,
+    FiPlayCircle,
+    FiShoppingCart
 } from "react-icons/fi"
 import Main from './components/Main';
 
@@ -87,7 +92,7 @@ export default function SideBar() {
                         >
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiHome} fontSize="2xl" className="active-icon" />
+                                    <Icon as={FiPlayCircle} fontSize="2xl" className="active-icon" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
                                     <Text className="active">Videos</Text>
@@ -95,10 +100,10 @@ export default function SideBar() {
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiUpload} fontSize="2xl" />
+                                    <Icon as={FiHeart} fontSize="2xl" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Upload</Text>
+                                    <Text>Favourites</Text>
                                 </Link>
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
@@ -106,21 +111,21 @@ export default function SideBar() {
                                     <Icon as={FiEdit} fontSize="2xl" />
                                 </Link>
                                 <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Edit</Text>
+                                    <Text>Advertise</Text>
                                 </Link>
                             </Flex>
                             <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
                                 <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiSettings} fontSize="2xl" /></Link>
+                                    <Icon as={FiShoppingCart} fontSize="2xl" /></Link>
                                 <Link to='#' _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Settings</Text>
+                                    <Text>Shop</Text>
                                 </Link>
                             </Flex>
                         </Flex>
                     </Flex>
-                    <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
-                        <Avatar my={2} src="avatar-1.jpg" />
-                        <Text textAlign="center">Soosi Soosi</Text>
+                    <Flex flexDir="column" alignItems="center" mb={10} mt={5} >
+                        <Link><Icon as={FiDollarSign} fontSize="2xl" /></Link>
+                        <Text textAlign="center">Donate</Text>
                     </Flex>
                 </Flex>
             </Flex>
