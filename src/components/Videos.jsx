@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     Box,
     Flex,
@@ -10,48 +10,80 @@ import {
     AspectRatio,
 } from '@chakra-ui/react';
 
-const VideoCard = ({ thumbnail, videoUrl, onClick, isSmallScreen }) => (
-    <Box
-        cursor="pointer"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        onClick={() => onClick(videoUrl)}
-        position="relative"
-    >
-        {isSmallScreen && videoUrl ? (
-            <AspectRatio ratio={16 / 9}>
-                <iframe
-                    title="Video Player"
-                    src={videoUrl}
-                    allowFullScreen
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                />
-            </AspectRatio>
-        ) : (
-            <>
-                <Image src={thumbnail} alt="Video Thumbnail" />
-                <Button
-                 color='teal.500'
-                    rounded={0}
-                    _hover={{
-                        bgGradient: 'linear(to-r, purple.500, pink.700)',
-                        boxShadow: 'xl'
-                    }}
-                    position="absolute"
-                    bottom="0"
-                    left="0"
-                    width="full"
-                >
-                    Play Video
-                </Button>
-            </>
-        )}
-    </Box>
-);
+// VideoCard component to display individual video cards with thumbnails
+const VideoCard = ({ thumbnail, videoUrl, onClick, isSmallScreen }) => {
+    const videoRef = useRef(null);
+    const [thumbnailSrc, setThumbnailSrc] = useState(thumbnail);
+    const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
+
+    // Load the thumbnail from video if no explicit thumbnail is provided
+    useEffect(() => {
+        if (!thumbnail && videoUrl) {
+            const video = videoRef.current;
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            video.addEventListener('loadeddata', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                setThumbnailSrc(canvas.toDataURL('image/jpeg'));
+                setIsThumbnailLoaded(true);
+            });
+        }
+    }, [videoUrl]);
+
+    return (
+        <Box
+            cursor="pointer"
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            onClick={() => onClick(videoUrl)}
+            position="relative"
+            width={{ base: 'full', md: '350px' }}  // Adjust width for card
+            height={{ base: 'auto', md: '250px' }}  // Adjust height for card
+        >
+            {isSmallScreen && videoUrl ? (
+                <AspectRatio ratio={9 / 16} width="full">
+                    <iframe
+                        title="Video Player"
+                        src={videoUrl}
+                        allowFullScreen
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        frameBorder="0"
+                    />
+                </AspectRatio>
+            ) : (
+                <>
+                    <Image
+                        src={isThumbnailLoaded ? thumbnailSrc : 'placeholder-image-url'} // Placeholder until thumbnail is loaded
+                        alt="Video Thumbnail"
+                        width="full"
+                        height="full"
+                        objectFit="cover"
+                    />
+                    <video ref={videoRef} src={videoUrl} style={{ display: 'none' }} />
+                    <Button
+                        color='teal.500'
+                        rounded={0}
+                        _hover={{
+                            bgGradient: 'linear(to-r, purple.500, pink.700)',
+                            boxShadow: 'xl'
+                        }}
+                        position="absolute"
+                        bottom="0"
+                        left="0"
+                        width="full"
+                        size="sm"  // Adjust size for smaller button
+                    >
+                        Play Video
+                    </Button>
+                </>
+            )}
+        </Box>
+    );
+};
 
 const VideoPlayer = ({ videoUrl }) => {
     const isGoogleDriveVideo = videoUrl.includes('drive.google.com');
@@ -74,14 +106,11 @@ const VideoPlayer = ({ videoUrl }) => {
             : videoUrl;
 
     return (
-        <AspectRatio ratio={16 / 9} width="full">
+        <AspectRatio ratio={16 / 9} width="full" height={{ base: "200px", md: "400px" }}>
             <iframe
                 title="Video Player"
                 src={embedUrl}
-                allowFullScreen
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                width="100%"
-                height="100%"
                 frameBorder="0"
             />
         </AspectRatio>
@@ -102,21 +131,25 @@ const VideoGallery = () => {
     }, []);
 
     const videos = [
-        { videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg' },
-        { videoUrl: 'https://www.youtube.com/embed/3JZ_D3ELwOQ', thumbnail: 'https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg' },
-        { videoUrl: 'https://www.youtube.com/embed/L_jWHffIx5E', thumbnail: 'https://img.youtube.com/vi/L_jWHffIx5E/hqdefault.jpg' },
-        { videoUrl: 'https://drive.google.com/file/d/14pXGlH2dxl3mL_pMgJLWoU72ZX5S2Cur/preview', thumbnail: 'https://drive.google.com/thumbnail?authuser=0&sz=w320&id=14pXGlH2dxl3mL_pMgJLWoU72ZX5S2Cur' },
-        { videoUrl: 'https://twitter.com/i/status/1820740583108792416', thumbnail: 'https://via.placeholder.com/320x180.png?text=Twitter+Video' }
+        { videoUrl: 'https://drive.google.com/file/d/1oCLA3s2i7c_Eh5iRpncPNhRNG0k9xSCG/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1oCLA3s2i7c_Eh5iRpncPNhRNG0k9xSCG' },
+        { videoUrl: 'https://drive.google.com/file/d/1hWgN773y0Rehy4do2TuSIjRO03dMS_op/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1hWgN773y0Rehy4do2TuSIjRO03dMS_op' },
+        { videoUrl: 'https://drive.google.com/file/d/19kvV9OZNJJxfHil5SDa619rXOe53NQTT/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=19kvV9OZNJJxfHil5SDa619rXOe53NQTT' },
+        { videoUrl: 'https://drive.google.com/file/d/1Rhb1FswUta_LqorUlK1aTnVavgMCxIfD/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1Rhb1FswUta_LqorUlK1aTnVavgMCxIfD' },
+        { videoUrl: 'https://drive.google.com/file/d/1ZYpdE3ve-vmveqlbIiiVmcA_jKHEqix4/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1ZYpdE3ve-vmveqlbIiiVmcA_jKHEqix4' },
+        { videoUrl: 'https://drive.google.com/file/d/1u1f4sIDHE--7kFMcmZW_SgTVe2opAAu9/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1u1f4sIDHE--7kFMcmZW_SgTVe2opAAu9' },
+        { videoUrl: 'https://drive.google.com/file/d/1eE4IfBOjLGbes8L9LZ5PMAFi0i2I2KcG/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=1eE4IfBOjLGbes8L9LZ5PMAFi0i2I2KcG' },
+        { videoUrl: 'https://drive.google.com/file/d/14pXGlH2dxl3mL_pMgJLWoU72ZX5S2Cur/preview', thumbnail: 'https://drive.google.com/uc?export=view&id=14pXGlH2dxl3mL_pMgJLWoU72ZX5S2Cur' },
     ];
 
     return (
         <Container maxW="container.xl" py={5}>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={5}>
-                <Box width={{ base: 'full', md: '100%' }}>
+                <Box width={{ base: 'full', md: '70%' }}>
                     {currentVideo && !isSmallScreen ? (
                         <VideoPlayer videoUrl={currentVideo} />
                     ) : (
                             <>
+                            
                             </>
                     )}
                 </Box>
@@ -126,7 +159,7 @@ const VideoGallery = () => {
                     {videos.map((video, index) => (
                         <VideoCard
                             key={index}
-                            thumbnail={video.thumbnail}
+                            thumbnail={video.thumbnail}  // Pass thumbnail URL here
                             videoUrl={video.videoUrl}
                             onClick={setCurrentVideo}
                             isSmallScreen={isSmallScreen}
