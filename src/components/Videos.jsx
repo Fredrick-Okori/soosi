@@ -41,7 +41,7 @@ const VideoCard = ({ thumbnail, videoUrl, onClick, isSmallScreen }) => {
             overflow="hidden"
             onClick={() => onClick(videoUrl)}
             position="relative"
-            width={{ base: 'full', md: '350px' }}  // Adjust width for card
+         // Adjust width for card
             height={{ base: 'auto', md: '250px' }}  // Adjust height for card
         >
             {isSmallScreen && videoUrl ? (
@@ -59,11 +59,12 @@ const VideoCard = ({ thumbnail, videoUrl, onClick, isSmallScreen }) => {
                     <Image
                         src={isThumbnailLoaded ? thumbnailSrc : 'placeholder-image-url'} // Placeholder until thumbnail is loaded
                         alt="Video Thumbnail"
-                        width="full"
-                        height="full"
+                        objectPosition="center"
                         objectFit="cover"
+                        width='fit-content'
+                        // Adjust width for thumbnail
                     />
-                    <video ref={videoRef} src={videoUrl} style={{ display: 'none' }} />
+                    <video ref={videoRef} src={videoUrl}  />
                     <Button
                         color='teal.500'
                         rounded={0}
@@ -106,7 +107,7 @@ const VideoPlayer = ({ videoUrl }) => {
             : videoUrl;
 
     return (
-        <AspectRatio ratio={16 / 9} width="full" height={{ base: "200px", md: "400px" }}>
+        <AspectRatio ratio={9/ 16} width="full" height={{ base: "100px", md: "500px" }}>
             <iframe
                 title="Video Player"
                 src={embedUrl}
@@ -154,7 +155,7 @@ const VideoGallery = () => {
                     )}
                 </Box>
 
-                <Flex direction="column" width={{ base: 'full', md: '30%' }} gap={5}>
+                <Flex direction="column"  gap={5}>
                     <Text fontWeight="bold" textAlign='center'>Popular Videos</Text>
                     {videos.map((video, index) => (
                         <VideoCard
